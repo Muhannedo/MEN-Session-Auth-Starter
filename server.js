@@ -24,6 +24,12 @@ app.use(morgan('dev'));
 
 // ROUTES
 
+// server.js
+
+// GET /test the route 
+app.get("/", async (req, res) => {
+    res.render("index.ejs");
+  });
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
