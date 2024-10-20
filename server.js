@@ -26,7 +26,7 @@ app.use(
       saveUninitialized: true,
     })
   );
-// ROUTES
+// ROUTES - public
 
 // server.js
 
@@ -38,6 +38,15 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/auth", authController);
+// protected routes
+app.get('/protected' , async (req, res)=>{
+    if(req.session.user){
+        res.send(`Welcome to the party ${req.session.user.username}.`);
+    }else{
+        res.sendStatus(404);
+        // res.send("Sorry, no guests allowed.");
+    }
+})
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
