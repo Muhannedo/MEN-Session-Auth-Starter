@@ -1,10 +1,20 @@
 // require the bcrypt
 const bcrypt = require("bcrypt");
 // facntion to encrypt the password
-function encrypthPassword (password){
-    return bcrypt.hashSync(password,process.env.SALT_ROUNDES);
+function encryptPassword (password){
+    return bcrypt.hashSync(password, parseInt( process.env.SALT_ROUNDES));
 
 }
 module.exports={
-    encrypthPassword
+    encryptPassword,
 };
+
+// const bcrypt = require('bcrypt');
+
+// function encryptPassword(password) {
+//   return bcrypt.hashSync(password, parseInt(process.env.SALT_ROUNDS));
+// }
+
+// module.exports = {
+//   encryptPassword,
+// };
