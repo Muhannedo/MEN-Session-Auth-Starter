@@ -5,16 +5,15 @@ function encryptPassword (password){
     return bcrypt.hashSync(password, parseInt( process.env.SALT_ROUNDES));
 
 }
+
+function comparedPassword(password, hashPassword){
+    return bcrypt.compareSync(password, hashPassword);
+
+}
+
+
+
 module.exports={
     encryptPassword,
+    comparedPassword,
 };
-
-// const bcrypt = require('bcrypt');
-
-// function encryptPassword(password) {
-//   return bcrypt.hashSync(password, parseInt(process.env.SALT_ROUNDS));
-// }
-
-// module.exports = {
-//   encryptPassword,
-// };

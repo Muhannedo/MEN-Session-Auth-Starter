@@ -4,7 +4,7 @@ const User = require('../models/user');
 const auth = require('../config/auth');
 
 const router = express.Router();
-
+// sign up
 router.get('/sign-up', async (req, res) => {
   res.render('auth/sign-up.ejs');
 });
@@ -35,5 +35,33 @@ router.post('/sign-up', async (req, res) => {
   // respond back to the browser
   res.send(`Thanks for signing up ${newUser.username}`);
 });
+ 
+// sign IN
+router.get("/sign-in", (req, res) => {
+    res.render("auth/sign-in.ejs");
+  });
+
+
+router.post('/sign-in' , async (req , res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    const user = await User.findOne({username});
+    //find the user from the user name
+
+     // if the user not exist send an error msg
+    if(!user){
+        return res.send('login failed , please try again');
+    }
+
+// compare the password submitted with the one in the databse 
+const validPassword = auth.comparedPassword(password , user.password);
+if (!validPassword) {
+    return res.send('login failed , please try again');
+}
+
+//if the password no good then send a error message 
+//
+})
+
 
 module.exports = router;
